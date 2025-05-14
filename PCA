@@ -1,0 +1,23 @@
+import cv2 
+import numpy as np 
+import matplotlib.pyplot as plt 
+from sklearn.decomposition import PCA 
+img1 = cv2.imread('download.jpg', cv2.IMREAD_GRAYSCALE) 
+def apply_pca_and_plot(image, title, n_components=50): 
+    height, width = image.shape 
+    pca = PCA(n_components=n_components) 
+    compressed = pca.fit_transform(image) 
+    reconstructed = pca.inverse_transform(compressed) 
+    plt.figure(figsize=(8, 4)) 
+    plt.suptitle(title, fontsize=14) 
+    plt.subplot(1, 2, 1) 
+    plt.title("Original") 
+    plt.imshow(image, cmap='gray') 
+    plt.axis('off') 
+    plt.subplot(1, 2, 2) 
+    plt.title(f"Reconstructed\n(n_components={n_components})") 
+    plt.imshow(reconstructed, cmap='gray') 
+    plt.axis('off') 
+    plt.tight_layout() 
+    plt.show() 
+apply_pca_and_plot(img1, "Image: Krishna", n_components=50) 
