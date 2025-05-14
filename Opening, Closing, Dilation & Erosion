@@ -1,0 +1,60 @@
+Opening 
+import cv2 
+import numpy as np 
+image=cv2.imread('x.webp',cv2.IMREAD_GRAYSCALE) 
+kernel=np.ones((5,5), np.uint8) 
+opened_image=cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel) 
+cv2.imshow('Original',image) 
+cv2.imshow('OpenedImage',opened_image) 
+cv2.waitKey(0) 
+cv2.destroyAllWindows() 
+
+
+Closing 
+import cv2 
+import numpy as np 
+image = cv2.imread('x.webp', cv2.IMREAD_GRAYSCALE) 
+kernel = np.ones((5, 5), np.uint8) 
+closed_image = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel) 
+cv2.imshow('Original', image) 
+cv2.imshow('ClosedImage', closed_image) 
+cv2.waitKey(0) 
+cv2.destroyAllWindows() 
+
+
+Dilation 
+import cv2 
+import numpy as np 
+import matplotlib.pyplot as plt 
+image = cv2.imread('x.webp', 0)   
+kernel = np.ones((5, 5), np.uint8) 
+dilation = cv2.dilate(image, kernel, iterations=1) 
+plt.figure(figsize=(6, 4)) 
+plt.subplot(1, 2, 1) 
+plt.imshow(image, cmap='gray')
+plt.title('Original Image') 
+plt.axis('off') 
+plt.subplot(1, 2, 2) 
+plt.imshow(dilation, cmap='gray') 
+plt.title('Dilated Image') 
+plt.axis('off') 
+plt.show() 
+
+
+Erosion 
+import cv2 
+import numpy as np 
+import matplotlib.pyplot as plt 
+image = cv2.imread('x.webp', 0)   
+kernel = np.ones((5, 5), np.uint8) 
+erosion = cv2.erode(image, kernel, iterations=1) 
+plt.figure(figsize=(6, 4)) 
+plt.subplot(1, 2, 1) 
+plt.imshow(image, cmap='gray') 
+plt.title('Original Image') 
+plt.axis('off') 
+plt.subplot(1, 2, 2) 
+plt.imshow(erosion, cmap='gray') 
+plt.title('Eroded Image') 
+plt.axis('off') 
+plt.show()
