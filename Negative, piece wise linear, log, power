@@ -1,0 +1,47 @@
+Image negative: 
+import cv2 
+import numpy as np  
+image = cv2.imread('download.jpg', cv2.IMREAD_GRAYSCALE) 
+neg_image = 255 - image  
+cv2.imshow('Original Image', image) 
+cv2.imshow('Negated Image', neg_image) 
+cv2.waitKey(0) 
+cv2.destroyAllWindows()
+
+Piece Wise Transformation: 
+import cv2 
+import numpy as np 
+def piecewise_linear_transform(image, breakpoints, values): 
+lookup_table = np.interp(np.arange(256), breakpoints, values).astype(np.uint8) 
+return cv2.LUT(image, lookup_table) 
+image = cv2.imread('download.jpg', cv2.IMREAD_GRAYSCALE)
+breakpoints = [0, 100, 150, 255]  
+values = [0, 50, 200, 255]        
+transformed_image = piecewise_linear_transform(image, breakpoints, values) 
+cv2.imshow('Original Image', image) 
+cv2.imshow('Transformed Image', transformed_image) 
+cv2.waitKey(0) 
+cv2.destroyAllWindows()
+
+Log Transformation:
+import numpy as np 
+import cv2 
+img = cv2.imread('nature.jpg', cv2.IMREAD_GRAYSCALE) 
+c = 255 / np.log(1 + 255)  # Max possible pixel value is 255, so scale with log(1+255) 
+log_transformed = c * np.log(1 + img.astype(np.float32)) 
+log_transformed = np.uint8(np.clip(log_transformed, 0, 255)) 
+cv2.imshow('Original', img) 
+cv2.imshow('Log Transformed', log_transformed) 
+cv2.waitKey(0) 
+cv2.destroyAllWindows() 
+
+Power law transformation: 
+import cv2 
+import numpy as np 
+image = cv2.imread('download.jpg', cv2.IMREAD_GRAYSCALE) 
+gamma = 2.0  # Adjust gamma to change the effect 
+gamma_image = np.array(255 * (image / 255) ** gamma, dtype='uint8') 
+cv2.imshow('Original Image', image) 
+cv2.imshow('Gamma Transformed Image', gamma_image) 
+cv2.waitKey(0) 
+cv2.destroyAllWindows() 
