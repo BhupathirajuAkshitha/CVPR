@@ -10,7 +10,7 @@ out = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height
 while cap.isOpened(): 
     ret, frame = cap.read() 
     if ret: 
-        cv2.imshow('Frame,frame)
+        cv2.imshow('Frame',frame)
         out.write(frame)
         if cv2.waitkey(1)&0xFF==ord('q'):
             break
